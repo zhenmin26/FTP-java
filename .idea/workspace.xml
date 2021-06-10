@@ -1,19 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="32a2becf-f117-4fc1-8223-f820c5aa8b74" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/FTP-java.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ftp.iml" beforeDir="false" />
+    <list default="true" id="32a2becf-f117-4fc1-8223-f820c5aa8b74" name="Default Changelist" comment="update WorkingThread, if user input null, then break while loop">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/server/DataConnection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/server/PASVCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/server/PORTCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/PASSCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/PASSCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/USERCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/USERCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/WorkingThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/WorkingThread.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -26,11 +53,13 @@
     </option>
   </component>
   <component name="ProjectId" id="1tk9qsDb8ZisvptjOu5GGQR6E25" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="project.structure.last.edited" value="Project" />
@@ -38,18 +67,94 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
   </component>
-  <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.ControlClient">
+    <configuration name="ControlClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="server.ControlClient" />
+      <module name="ftp-java" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ControlClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="server.ControlClient" />
+      <module name="ftp-java" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DataClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="server.DataClient" />
+      <module name="ftp-java" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="server.Server" />
+      <module name="ftp-java" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="socketClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.zhenmin.socket.socketClient" />
+      <module name="ftp-java" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.zhenmin.socket.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.ControlClient" />
+        <item itemvalue="Application.Server" />
+        <item itemvalue="Application.DataClient" />
+        <item itemvalue="Application.ControlClient" />
+        <item itemvalue="Application.socketClient" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -59,7 +164,72 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1623302413968</updated>
+      <workItem from="1623302415048" duration="582000" />
+      <workItem from="1623315538152" duration="311000" />
+      <workItem from="1623319153590" duration="192000" />
+      <workItem from="1623319582332" duration="6063000" />
+      <workItem from="1623327300938" duration="286000" />
+      <workItem from="1623328110263" duration="615000" />
+      <workItem from="1623328841052" duration="221000" />
+      <workItem from="1623329228610" duration="837000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="update WorkingThread, if user input null, then break while loop" />
+    <option name="LAST_COMMIT_MESSAGE" value="update WorkingThread, if user input null, then break while loop" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="218" y="122" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1623303132522">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="218" y="122" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.877@0.23.1440.877" timestamp="1623303132522" />
+    <state width="1314" height="230" key="GridCell.Tab.0.bottom" timestamp="1623330107001">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state width="1314" height="230" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1623330107001" />
+    <state width="1314" height="230" key="GridCell.Tab.0.center" timestamp="1623330107000">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state width="1314" height="230" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1623330107000" />
+    <state width="1314" height="230" key="GridCell.Tab.0.left" timestamp="1623330107000">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state width="1314" height="230" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1623330107000" />
+    <state width="1314" height="230" key="GridCell.Tab.0.right" timestamp="1623330107001">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state width="1314" height="230" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1623330107001" />
+    <state width="1314" height="285" key="GridCell.Tab.1.bottom" timestamp="1623329061990">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state width="1314" height="285" key="GridCell.Tab.1.bottom/0.23.1440.877@0.23.1440.877" timestamp="1623329061990" />
+    <state width="1314" height="285" key="GridCell.Tab.1.center" timestamp="1623329061989">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state width="1314" height="285" key="GridCell.Tab.1.center/0.23.1440.877@0.23.1440.877" timestamp="1623329061989" />
+    <state width="1314" height="285" key="GridCell.Tab.1.left" timestamp="1623329061989">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state width="1314" height="285" key="GridCell.Tab.1.left/0.23.1440.877@0.23.1440.877" timestamp="1623329061989" />
+    <state width="1314" height="285" key="GridCell.Tab.1.right" timestamp="1623329061989">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state width="1314" height="285" key="GridCell.Tab.1.right/0.23.1440.877@0.23.1440.877" timestamp="1623329061989" />
   </component>
 </project>

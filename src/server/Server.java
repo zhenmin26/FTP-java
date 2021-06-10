@@ -8,7 +8,7 @@ public class Server {
     private int controlPort = 5678;
     private ServerSocket server;
 
-    public Server() throws IOException {
+    public Server(){
         try{
             server = new ServerSocket(controlPort); // socket listening on controlPort 5678
         }
@@ -30,19 +30,12 @@ public class Server {
 
                 System.out.println("New connection! New Thread created!");
                 numberOfThreads++;
-//                System.out.println("Current number of clients: " + numberOfThreads);
                 newWorkingThread.start();
             }
             catch(IOException e){
                 System.out.println("error from accept");
             }
         }
-//        try {
-//            server.close();
-//        }
-//        catch(IOException e){
-//            System.out.println("error from stopping server");
-//        }
     }
 
     public static void main(String[] args) throws IOException {

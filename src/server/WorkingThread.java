@@ -8,7 +8,9 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class WorkingThread extends Thread{
+public class WorkingThread extends Thread {
+    private boolean quitCommand = true;
+
     // file path
     private String rootDir;
     private String currentDir;
@@ -28,7 +30,7 @@ public class WorkingThread extends Thread{
     private BufferedReader controlIn;
     private PrintWriter controlOut;
 
-    public WorkingThread(Socket client, int dataPort){
+    public WorkingThread(Socket client, int dataPort) {
         this.controlSocket = client;
         this.dataPort = dataPort;
 
@@ -43,23 +45,27 @@ public class WorkingThread extends Thread{
                     new InputStreamReader(controlSocket.getInputStream()));
             controlOut = new PrintWriter(controlSocket.getOutputStream(), true);
 
-            controlOut.println("2xx Hello from FTP-Server"); //controlPort connected
+            msgToClient("220 Connected. Hello from FTP-Server."); //controlPort connected
 
-            while(true) {
+            while(quitCommand) {
                 // access command from client
                 String userCommand = controlIn.readLine();
                 System.out.println("control server receive command " + userCommand);
 
-                CommandProcessor(userCommand);
-//                if(userCommand.equals("end")){
-//                    break;
-//                }
+                // verify user input
+                if(userCommand != null) {
+                    CommandProcessor(userCommand);
+                }
+                else{
+                    break;
+                }
             }
-//            System.out.println("outside while loop, ready to close control socket");
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             try {
+                controlIn.close();
+                controlOut.close();
                 controlSocket.close();
             } catch (IOException e) {
                 System.out.println("cannot stop control socket");
@@ -68,7 +74,11 @@ public class WorkingThread extends Thread{
         }
     }
 
-    private void CommandProcessor(String userCommand){
+    private void msgToClient(String msg) {
+        controlOut.println(msg);
+    }
+
+    private void CommandProcessor(String userCommand) {
         int indexOfSpace = userCommand.indexOf(" ");
         String command = "";
         String args = "";
@@ -80,7 +90,6 @@ public class WorkingThread extends Thread{
         else {
             command = userCommand.substring(0,indexOfSpace).toUpperCase();
             args = userCommand.substring(indexOfSpace+1);
-
         }
 
         switch(command){
@@ -93,74 +102,65 @@ public class WorkingThread extends Thread{
                 new PASSCommand(args, controlOut);
                 break;
 
+            // passive mode
+            case "PASV":
+                new PASVCommand(args, controlOut);
+                break;
+
+            // active mode
+            case "PORT":
+                new PORTCommand(args, controlOut);
+                break;
+
+            // user quit
+            case "QUIT":
+                msgToClient("Connection closed. Service stopped.");
+                this.quitCommand = false;
+                break;
+
             case "CWD":
-                new CWDCommand(args, controlOut);
                 break;
 
             case "LIST":
-
                 break;
 
             case "NLST":
-
                 break;
 
             case "PWD":
-
-                break;
-
-            case "QUIT":
-
-                break;
-
-            case "PASV":
-
                 break;
 
             case "EPSV":
-
                 break;
 
             case "SYST":
-
                 break;
 
             case "FEAT":
-
-                break;
-
-            case "PORT":
-
                 break;
 
             case "EPRT":
-
                 break;
 
             case "RETR":
-
                 break;
 
             case "MKD":
-
                 break;
 
             case "RMD":
-
                 break;
 
             case "TYPE":
-
                 break;
 
             case "STOR":
-
                 break;
 
             default:
                 // invalid command
+                msgToClient("501 invalid command");
                 break;
         }
-
     }
 }

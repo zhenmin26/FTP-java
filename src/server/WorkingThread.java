@@ -43,8 +43,7 @@ public class WorkingThread extends Thread{
                     new InputStreamReader(controlSocket.getInputStream()));
             controlOut = new PrintWriter(controlSocket.getOutputStream(), true);
 
-            controlOut.println("Hello from FTP-Server"); //controlPort connected
-            controlOut.flush();
+            controlOut.println("2xx Hello from FTP-Server"); //controlPort connected
 
             while(true) {
                 // access command from client

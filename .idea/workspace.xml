@@ -20,15 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="32a2becf-f117-4fc1-8223-f820c5aa8b74" name="Default Changelist" comment="update WorkingThread, if user input null, then break while loop">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/DataConnection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/PASVCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/PORTCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/PASSCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/PASSCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/USERCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/USERCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/WorkingThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/WorkingThread.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,15 +127,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -171,8 +163,17 @@
       <workItem from="1623327300938" duration="286000" />
       <workItem from="1623328110263" duration="615000" />
       <workItem from="1623328841052" duration="221000" />
-      <workItem from="1623329228610" duration="837000" />
+      <workItem from="1623329228610" duration="976000" />
+      <workItem from="1623332126843" duration="443000" />
     </task>
+    <task id="LOCAL-00001" summary="update WorkingThread, if user input null, then break while loop">
+      <created>1623330151529</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1623330151529</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -199,22 +200,22 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="218" y="122" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.877@0.23.1440.877" timestamp="1623303132522" />
-    <state width="1314" height="230" key="GridCell.Tab.0.bottom" timestamp="1623330107001">
+    <state width="1314" height="230" key="GridCell.Tab.0.bottom" timestamp="1623332294690">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1314" height="230" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1623330107001" />
-    <state width="1314" height="230" key="GridCell.Tab.0.center" timestamp="1623330107000">
+    <state width="1314" height="230" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1623332294690" />
+    <state width="1314" height="230" key="GridCell.Tab.0.center" timestamp="1623332294688">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1314" height="230" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1623330107000" />
-    <state width="1314" height="230" key="GridCell.Tab.0.left" timestamp="1623330107000">
+    <state width="1314" height="230" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1623332294688" />
+    <state width="1314" height="230" key="GridCell.Tab.0.left" timestamp="1623332294686">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1314" height="230" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1623330107000" />
-    <state width="1314" height="230" key="GridCell.Tab.0.right" timestamp="1623330107001">
+    <state width="1314" height="230" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1623332294686" />
+    <state width="1314" height="230" key="GridCell.Tab.0.right" timestamp="1623332294689">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1314" height="230" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1623330107001" />
+    <state width="1314" height="230" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1623332294689" />
     <state width="1314" height="285" key="GridCell.Tab.1.bottom" timestamp="1623329061990">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
@@ -231,5 +232,9 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1314" height="285" key="GridCell.Tab.1.right/0.23.1440.877@0.23.1440.877" timestamp="1623329061989" />
+    <state x="362" y="187" key="Vcs.Push.Dialog.v2" timestamp="1623330155313">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="362" y="187" key="Vcs.Push.Dialog.v2/0.23.1440.877@0.23.1440.877" timestamp="1623330155313" />
   </component>
 </project>

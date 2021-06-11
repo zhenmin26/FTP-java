@@ -21,7 +21,8 @@ public class DataConnection {
             System.out.println("Active mode - host: " + host + "port: " + port);
             this.dataConnection = new Socket(host, port);
             dataOutActive = new PrintWriter(dataConnection.getOutputStream(), true);
-            dataOutActive.println("230 Data connection established - active mode");
+            out.println("230 Data connection established - active mode");
+//            dataOutActive.println("230 Data connection established - active mode");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -38,7 +39,8 @@ public class DataConnection {
             thread.setPassiveDataConnection(dataConnection);
 
             dataOutPassive = new PrintWriter(dataConnection.getOutputStream(), true);
-            dataOutPassive.println("230 Data connection established - passive mode");
+            out.println("230 Data connection established - passive mode");
+//            dataOutPassive.println("230 Data connection established - passive mode");
         } catch (IOException e) {
             e.printStackTrace();
         }

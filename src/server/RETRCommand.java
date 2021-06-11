@@ -14,9 +14,6 @@ public class RETRCommand {
             fin = new BufferedInputStream(new FileInputStream(f));
             fout = new BufferedOutputStream(thread.getPassiveDataConnection().getOutputStream());
 
-            fout.write(111);
-            fout.flush();
-
             // buffer
             byte[] buffer = new byte[1024];
             int len = 0;

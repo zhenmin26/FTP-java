@@ -1,7 +1,6 @@
 package server;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -118,25 +117,37 @@ public class WorkingThread extends Thread {
                 }
                 break;
 
-            // user upload file to server
-            case "PUT":
-                new PUTCommand();
-                break;
-
             // user retrieve file from server
             case "RETR":
                 new RETRCommand(args, controlOut, this);
                 break;
 
+            // user upload file to server
+            case "STOR":
+                new STORCommand();
+                break;
+
+            // delete file
+            case "RMD":
+                new RMDCommand();
+                break;
+
+            // current directory
+            case "PWD":
+                new PWDCommand(controlOut);
+                break;
+
             // list content of current dir
             case "LIST":
-                if(userLogin == true && args != null){
-                    new LISTCommand(args, controlOut, this);
-                }else if (userLogin == true && args == null){
-                    msgToClient("File/Directory required.");
+                if(args == null){
+                    new LISTCommand("/Users/luzhenmin/FTP-java/ftpHome", controlOut, this);
                 }
-                else{
-                    msgToClient("User not login.");
+                else {
+                    if (userLogin == true) {
+                        new LISTCommand(args, controlOut, this);
+                    } else {
+                        msgToClient("User not login.");
+                    }
                 }
                 break;
 
@@ -150,13 +161,9 @@ public class WorkingThread extends Thread {
                 break;
 
 
-
             case "NLST":
                 break;
 
-            case "PWD":
-                new PWDCommand(controlOut);
-                break;
 
             case "EPSV":
                 break;
@@ -173,13 +180,7 @@ public class WorkingThread extends Thread {
             case "MKD":
                 break;
 
-            case "RMD":
-                break;
-
             case "TYPE":
-                break;
-
-            case "STOR":
                 break;
 
             default:

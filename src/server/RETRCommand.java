@@ -11,8 +11,10 @@ public class RETRCommand {
             out.println("550 File does not exist.");
         }
         else{
+            out.println("Data transfer starts");
+
             fin = new BufferedInputStream(new FileInputStream(f));
-            fout = new BufferedOutputStream(thread.getPassiveDataConnection().getOutputStream());
+            fout = new BufferedOutputStream(thread.getDataConnection().getOutputStream());
 
             // buffer
             byte[] buffer = new byte[1024];
@@ -37,6 +39,12 @@ public class RETRCommand {
             out.println("Could not close file stream.");
             e.printStackTrace();
         }
+
         out.println("226 File transferred successfully");
+
+        thread.closePassiveDataSocket();
+        thread.setPassiveDataSocket(null);
+        thread.closeDataConnection();
+        thread.setDataConnection(null);
     }
 }

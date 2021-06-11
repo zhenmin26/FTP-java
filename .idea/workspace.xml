@@ -19,15 +19,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32a2becf-f117-4fc1-8223-f820c5aa8b74" name="Default Changelist" comment="add PORT, PASV, PWD, LIST and relevant dataConnection for thread">
-      <change afterPath="$PROJECT_DIR$/src/server/STORCommand.java" afterDir="false" />
+    <list default="true" id="32a2becf-f117-4fc1-8223-f820c5aa8b74" name="Default Changelist" comment="update server">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/controlconnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/controlconnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/DELETECommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/RMDCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/DataConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/DataConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/LISTCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/LISTCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/PUTCommand.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/RETRCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/RETRCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/STORCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/STORCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/WorkingThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/WorkingThread.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -67,7 +65,7 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
   </component>
-  <component name="RunManager" selected="Application.DataClient">
+  <component name="RunManager" selected="Application.controlconnection">
     <configuration name="ControlClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="server.ControlClient" />
       <module name="ftp-java" />
@@ -121,18 +119,11 @@
       </method>
     </configuration>
     <configuration name="controlconnection" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="controlconnection" />
-      <module name="ftp-java" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="socketClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.zhenmin.socket.socketClient" />
+      <option name="MAIN_CLASS_NAME" value="client.controlconnection" />
       <module name="ftp-java" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.zhenmin.socket.*" />
+          <option name="PATTERN" value="client.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -151,13 +142,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.ControlClient" />
+      <item itemvalue="Application.DataClient" />
+      <item itemvalue="Application.Server" />
+      <item itemvalue="Application.controlconnection" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.DataClient" />
-        <item itemvalue="Application.ControlClient" />
-        <item itemvalue="Application.Server" />
         <item itemvalue="Application.controlconnection" />
+        <item itemvalue="Application.Server" />
         <item itemvalue="Application.ControlClient" />
+        <item itemvalue="Application.DataClient" />
       </list>
     </recent_temporary>
   </component>
@@ -182,7 +178,9 @@
       <workItem from="1623389352305" duration="11549000" />
       <workItem from="1623401540006" duration="519000" />
       <workItem from="1623402470243" duration="8000" />
-      <workItem from="1623402850670" duration="7180000" />
+      <workItem from="1623402850670" duration="11382000" />
+      <workItem from="1623415824808" duration="2156000" />
+      <workItem from="1623418137612" duration="5392000" />
     </task>
     <task id="LOCAL-00001" summary="update WorkingThread, if user input null, then break while loop">
       <created>1623330151529</created>
@@ -205,7 +203,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623401449770</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="update server">
+      <created>1623411505282</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1623411505282</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -227,49 +232,50 @@
     <MESSAGE value="update WorkingThread, if user input null, then break while loop" />
     <MESSAGE value="add if(user login status) in USER and PASS" />
     <MESSAGE value="add PORT, PASV, PWD, LIST and relevant dataConnection for thread" />
-    <option name="LAST_COMMIT_MESSAGE" value="add PORT, PASV, PWD, LIST and relevant dataConnection for thread" />
+    <MESSAGE value="update server" />
+    <option name="LAST_COMMIT_MESSAGE" value="update server" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="218" y="122" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1623303132522">
+    <state x="218" y="122" width="1071" height="748" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1623422045641">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="218" y="122" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.877@0.23.1440.877" timestamp="1623303132522" />
-    <state width="1368" height="230" key="GridCell.Tab.0.bottom" timestamp="1623411382476">
+    <state x="218" y="122" width="1071" height="748" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.877@0.23.1440.877" timestamp="1623422045641" />
+    <state width="1389" height="230" key="GridCell.Tab.0.bottom" timestamp="1623428034404">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1368" height="230" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1623411382476" />
-    <state width="1368" height="230" key="GridCell.Tab.0.center" timestamp="1623411382474">
+    <state width="1389" height="230" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1623428034404" />
+    <state width="1389" height="230" key="GridCell.Tab.0.center" timestamp="1623428034404">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1368" height="230" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1623411382474" />
-    <state width="1368" height="230" key="GridCell.Tab.0.left" timestamp="1623411382473">
+    <state width="1389" height="230" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1623428034404" />
+    <state width="1389" height="230" key="GridCell.Tab.0.left" timestamp="1623428034404">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1368" height="230" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1623411382473" />
-    <state width="1368" height="230" key="GridCell.Tab.0.right" timestamp="1623411382474">
+    <state width="1389" height="230" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1623428034404" />
+    <state width="1389" height="230" key="GridCell.Tab.0.right" timestamp="1623428034404">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1368" height="230" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1623411382474" />
-    <state width="1368" height="285" key="GridCell.Tab.1.bottom" timestamp="1623410077842">
+    <state width="1389" height="230" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1623428034404" />
+    <state width="1368" height="285" key="GridCell.Tab.1.bottom" timestamp="1623415806033">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1368" height="285" key="GridCell.Tab.1.bottom/0.23.1440.877@0.23.1440.877" timestamp="1623410077842" />
-    <state width="1368" height="285" key="GridCell.Tab.1.center" timestamp="1623410077834">
+    <state width="1368" height="285" key="GridCell.Tab.1.bottom/0.23.1440.877@0.23.1440.877" timestamp="1623415806033" />
+    <state width="1368" height="285" key="GridCell.Tab.1.center" timestamp="1623415806032">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1368" height="285" key="GridCell.Tab.1.center/0.23.1440.877@0.23.1440.877" timestamp="1623410077834" />
-    <state width="1368" height="285" key="GridCell.Tab.1.left" timestamp="1623410077829">
+    <state width="1368" height="285" key="GridCell.Tab.1.center/0.23.1440.877@0.23.1440.877" timestamp="1623415806032" />
+    <state width="1368" height="285" key="GridCell.Tab.1.left" timestamp="1623415806032">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1368" height="285" key="GridCell.Tab.1.left/0.23.1440.877@0.23.1440.877" timestamp="1623410077829" />
-    <state width="1368" height="285" key="GridCell.Tab.1.right" timestamp="1623410077841">
+    <state width="1368" height="285" key="GridCell.Tab.1.left/0.23.1440.877@0.23.1440.877" timestamp="1623415806032" />
+    <state width="1368" height="285" key="GridCell.Tab.1.right" timestamp="1623415806032">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1368" height="285" key="GridCell.Tab.1.right/0.23.1440.877@0.23.1440.877" timestamp="1623410077841" />
-    <state x="362" y="187" key="Vcs.Push.Dialog.v2" timestamp="1623401512673">
+    <state width="1368" height="285" key="GridCell.Tab.1.right/0.23.1440.877@0.23.1440.877" timestamp="1623415806032" />
+    <state x="362" y="187" key="Vcs.Push.Dialog.v2" timestamp="1623411512639">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="362" y="187" key="Vcs.Push.Dialog.v2/0.23.1440.877@0.23.1440.877" timestamp="1623401512673" />
+    <state x="362" y="187" key="Vcs.Push.Dialog.v2/0.23.1440.877@0.23.1440.877" timestamp="1623411512639" />
     <state x="719" y="381" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1623408965954">
       <screen x="0" y="23" width="1440" height="877" />
     </state>

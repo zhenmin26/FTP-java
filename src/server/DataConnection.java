@@ -35,10 +35,11 @@ public class DataConnection {
             passiveDataSocket = new ServerSocket(port);
             this.dataConnection = passiveDataSocket.accept();
 
-            // set data connection for thread
-            thread.setPassiveDataConnection(dataConnection);
+            // set data connection and data Server-Socket for thread
+            thread.setDataConnection(dataConnection);
+            thread.setPassiveDataSocket(passiveDataSocket);
 
-            dataOutPassive = new PrintWriter(dataConnection.getOutputStream(), true);
+//            dataOutPassive = new PrintWriter(dataConnection.getOutputStream(), true);
             out.println("230 Data connection established - passive mode");
 //            dataOutPassive.println("230 Data connection established - passive mode");
         } catch (IOException e) {

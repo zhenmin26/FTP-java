@@ -17,12 +17,13 @@ public class WorkingThread extends Thread {
 
     // control socket
     private Socket controlSocket;
+    private ServerSocket passiveDataSocket;
 
     // data socket
     private ServerSocket dataSocket;
     private String dataHost;
     private int dataPort;
-    private Socket passiveDataConnection;
+    private Socket dataConnection;
 
     // data flow
     private BufferedReader controlIn;
@@ -119,12 +120,22 @@ public class WorkingThread extends Thread {
 
             // user retrieve file from server
             case "RETR":
-                new RETRCommand(args, controlOut, this);
+                if(dataConnection != null) {
+                    new RETRCommand(args, controlOut, this);
+                }
+                else{
+                    msgToClient("Choose active/passive mode first.");
+                }
                 break;
 
             // user upload file to server
             case "STOR":
-                new STORCommand();
+                if(dataConnection != null) {
+                    new STORCommand(args, controlOut, this);
+                }
+                else{
+                    msgToClient("Choose active/passive mode first.");
+                }
                 break;
 
             // delete file
@@ -140,7 +151,7 @@ public class WorkingThread extends Thread {
             // list content of current dir
             case "LIST":
                 if(args == null){
-                    new LISTCommand("/Users/luzhenmin/FTP-java/ftpHome", controlOut, this);
+                    new LISTCommand(Repository.currentDir, controlOut, this);
                 }
                 else {
                     if (userLogin == true) {
@@ -210,11 +221,21 @@ public class WorkingThread extends Thread {
         this.dataPort = port;
     }
 
-    public void setPassiveDataConnection(Socket socket){
-        this.passiveDataConnection = socket;
+    public void setDataConnection(Socket socket){
+        this.dataConnection = socket;
     }
 
-    public Socket getPassiveDataConnection(){
-        return passiveDataConnection;
+    public Socket getDataConnection(){
+        return dataConnection;
+    }
+
+    public void setPassiveDataSocket(ServerSocket dataSocket){ this.passiveDataSocket = dataSocket; }
+
+    public void closePassiveDataSocket() throws IOException {
+        this.passiveDataSocket.close();
+    }
+
+    public void closeDataConnection() throws IOException {
+        this.dataConnection.close();
     }
 }

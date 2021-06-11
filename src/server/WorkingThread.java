@@ -11,20 +11,19 @@ import java.net.Socket;
 public class WorkingThread extends Thread {
     private boolean quitCommand = true;
 
-    // file path
-    private String rootDir;
-    private String currentDir;
-    final String fileSeperator = File.separator;
 
     // user of thread
-    public static final ThreadLocal<String> USER = new ThreadLocal<String>();
+    private ThreadLocal<String> USER = new ThreadLocal<String>();
+    private boolean userLogin = false;
 
     // control socket
     private Socket controlSocket;
 
     // data socket
     private ServerSocket dataSocket;
+    private String dataHost;
     private int dataPort;
+    private Socket passiveDataConnection;
 
     // data flow
     private BufferedReader controlIn;
@@ -35,8 +34,8 @@ public class WorkingThread extends Thread {
         this.dataPort = dataPort;
 
         // "user.home": user home dir
-        this.rootDir = System.getProperty("user.dir"); // user current working dir
-        this.currentDir = System.getProperty("user.dir") + fileSeperator + "ftpHome";
+        Repository.rootDir = System.getProperty("user.dir"); // user current working dir
+        Repository.currentDir = System.getProperty("user.dir") + Repository.fileSeperator + "ftpHome";
     }
 
     public void run() {
@@ -78,38 +77,67 @@ public class WorkingThread extends Thread {
         controlOut.println(msg);
     }
 
-    private void CommandProcessor(String userCommand) {
+    private void CommandProcessor(String userCommand) throws IOException {
         int indexOfSpace = userCommand.indexOf(" ");
         String command = "";
         String args = "";
 
-        if(indexOfSpace == -1) { // no args
+        if (indexOfSpace == -1) { // no args
             command = userCommand.toUpperCase();
             args = null;
-        }
-        else {
-            command = userCommand.substring(0,indexOfSpace).toUpperCase();
-            args = userCommand.substring(indexOfSpace+1);
+        } else {
+            command = userCommand.substring(0, indexOfSpace).toUpperCase();
+            args = userCommand.substring(indexOfSpace + 1);
         }
 
-        switch(command){
+        switch (command) {
             // user login
             case "USER":
-                new USERCommand(args, controlOut);
+                new USERCommand(args, controlOut, this);
                 break;
 
             case "PASS":
-                new PASSCommand(args, controlOut);
+                new PASSCommand(args, controlOut, this);
                 break;
 
             // passive mode
             case "PASV":
-                new PASVCommand(args, controlOut);
+                if (userLogin) {
+                    new PASVCommand(dataPort, args, controlOut, this);
+                } else {
+                    msgToClient("Please login first");
+                }
                 break;
 
             // active mode
             case "PORT":
-                new PORTCommand(args, controlOut);
+                if (userLogin) {
+                    new PORTCommand(args, controlOut);
+                } else {
+                    msgToClient("Please login first");
+                }
+                break;
+
+            // user upload file to server
+            case "PUT":
+                new PUTCommand();
+                break;
+
+            // user retrieve file from server
+            case "RETR":
+                new RETRCommand(args, controlOut, this);
+                break;
+
+            // list content of current dir
+            case "LIST":
+                if(userLogin == true && args != null){
+                    new LISTCommand(args, controlOut, this);
+                }else if (userLogin == true && args == null){
+                    msgToClient("File/Directory required.");
+                }
+                else{
+                    msgToClient("User not login.");
+                }
                 break;
 
             // user quit
@@ -121,13 +149,13 @@ public class WorkingThread extends Thread {
             case "CWD":
                 break;
 
-            case "LIST":
-                break;
+
 
             case "NLST":
                 break;
 
             case "PWD":
+                new PWDCommand(controlOut);
                 break;
 
             case "EPSV":
@@ -140,9 +168,6 @@ public class WorkingThread extends Thread {
                 break;
 
             case "EPRT":
-                break;
-
-            case "RETR":
                 break;
 
             case "MKD":
@@ -159,8 +184,36 @@ public class WorkingThread extends Thread {
 
             default:
                 // invalid command
-                msgToClient("501 invalid command");
+                msgToClient("501 Invalid command.");
                 break;
         }
+    }
+
+    public boolean getUserStatus(){
+        return userLogin;
+    }
+
+    public void setUserStatus(boolean isLogin){
+        this.userLogin = true;
+    }
+
+    public void setUser(String user){
+        this.USER.set(user);;
+    }
+
+    public void setDataHost(String host){
+        this.dataHost = host;
+    }
+
+    public void setDataPort(int port){
+        this.dataPort = port;
+    }
+
+    public void setPassiveDataConnection(Socket socket){
+        this.passiveDataConnection = socket;
+    }
+
+    public Socket getPassiveDataConnection(){
+        return passiveDataConnection;
     }
 }

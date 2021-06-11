@@ -1,4 +1,10 @@
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.Flushable;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,15 +21,16 @@ import java.util.StringTokenizer;
 public class controlconnection {
 	private String user;
 	private String pass;
+	private Socket ctrsocket;
+	private Socket datasocket;
 	private static BufferedReader ctrin;
 	private static PrintWriter ctrout;
 	private boolean passive_mode=false;
-//	private String ip="127.0.0.1";
-//	private int serverport=21; 这两部分有什么必要？
-	
+	private String cdir="/Users/mayining/eclipse-workspace/FTP-master/client-directory/";
+//	private String sdir;
 	public controlconnection(String ip, String username, String password) {
 		try {
-			Socket ctrsocket=new Socket(ip,5678);
+			ctrsocket=new Socket(ip,5678);
 			setUsername(username);
 			setPassword(password);
 			ctrin = new BufferedReader(new InputStreamReader(ctrsocket.getInputStream()));
@@ -31,32 +38,20 @@ public class controlconnection {
 			startCtrConnection();
 			System.out.println("please choose active/passive transition");
 			while(true) {
+				//首先读用户选择传递的方式是主动还是被动
 				BufferedReader wt = new BufferedReader(new InputStreamReader(System.in));
-				if(!wt.readLine().equals("quit")) {
-					if(wt.readLine().equals("active")) {
+			    String str=wt.readLine();
+				if(!str.equals("quit")) {
+					//主动模式下，读取用户需要的操作及参数
+					if(str.equals("active")) {
+						System.out.println("active");
 						active_mode();
-						String line=wt.readLine().trim();
-						String[] commandline=line.split(" ");
-						String cmd="";
-						StringBuilder cmdarg=new StringBuilder();
-						if(commandline!=null) {
-							cmd=commandline[0].trim();
-							for(int i=1;i<commandline.length;i++) {
-								cmdarg.append(commandline[i]);
-								cmdarg.append(" ");
-							}
-						}
-					
-							switch(cmd) {
-								case "put":	
-									do_upload_active(cmdarg.toString().trim());
-							}
-						
+						processcmd();
 					}
-					if(wt.readLine().equals("passive") ){
+					if(str.equals("passive") ){
 						passive_mode();
-			
-					
+						processcmd();
+	
 					}else{
 						System.out.println("invalid command,please rewrite");
 					}
@@ -154,20 +149,20 @@ public controlconnection() {
 	
 	/*开启主动模式
 	 * 提供一个随机端口，以“PORT +端口”的格式发送信息给服务器并等待连接
-	 * 返回一个datasocket，或者将这个写为实例变量？
 	 */
-	public Socket active_mode() throws Exception {
+	public void active_mode() throws Exception {
 		String response;
 		int dataport=(int)(Math.random()*100000%9999)+1024;//random dataport
 		System.out.println(dataport);
 		ctrout.println("PORT "+dataport);//send information to server
+		
 		response=ctrin.readLine();
 		System.out.println(response);
 		ServerSocket dataSocketserver=new ServerSocket(dataport);
-		Socket dataSocket=dataSocketserver.accept();//connect and listen
+		datasocket=dataSocketserver.accept();//connect and listen
 		response=ctrin.readLine();
 		System.out.println(response);
-		return dataSocket;
+		
 	}
 	
 	/*
@@ -199,24 +194,99 @@ public controlconnection() {
         return dataSocket;
 	//}
 	}
+	public void processcmd() throws Exception {
+		BufferedReader wt = new BufferedReader(new InputStreamReader(System.in));
+		String line=wt.readLine().trim();
+		String[] commandline=line.split(" ");
+		String cmd="";
+		System.out.print("ftp> ");
+		StringBuilder cmdarg=new StringBuilder();
+		if(commandline!=null) {
+			cmd=commandline[0].trim();
+			for(int i=1;i<commandline.length;i++) {
+				cmdarg.append(commandline[i]);
+				cmdarg.append(" ");
+			}
+		}
+			switch(cmd) {
+				case "put":	
+					do_upload(cmdarg.toString().trim());
+				case "get":
+					do_download(cmdarg.toString().trim());
+				case"quit":
+					do_quit();
+				case"delete":
+					do_delete(cmdarg.toString().trim());
+				case"list":
+					do_list();
+			}
+	}
 	
 	public void do_quit() {
 		
 	}
 	
-	public void do_upload_active(String filename) {
-		
+	public void do_upload(String filename) throws Exception {
+		String response="";
+		String path=cdir+filename;
+		File file=new File(path);
+		if(!file.exists()) {
+			System.out.println("file doesnot exist");
+			return;
+		}
+		FileInputStream fileinput = new FileInputStream(file);
+        BufferedInputStream input = new BufferedInputStream(fileinput);
+        ctrout.println("STOR "+filename);
+        response=ctrin.readLine();
+        System.out.println(response);
+        BufferedOutputStream dataout=new BufferedOutputStream(datasocket.getOutputStream());
+        byte[] buffer = new byte[4096];
+        int bytesRead = 0;
+        while ((bytesRead = input.read(buffer)) != -1) {
+            dataout.write(buffer, 0, bytesRead);//将待传文件读到缓冲区,并从缓冲区中读入到dataout中，传到server
+        }
+        dataout.flush();
+        dataout.close();
+        input.close();
+        datasocket.close();
+        response = ctrin.readLine();
+        System.out.println(response);
 	}
 	
-	public void do_upload_passive(String filename) {
-		
+	public void do_download(String filename) throws Exception {
+		String response;
+		ctrout.println("RETR "+filename);
+		response=ctrin.readLine();
+		BufferedInputStream datain = new BufferedInputStream(datasocket.getInputStream());
+		//检查本地文件夹中如果有这个文件，则直接删除
+		File outfile=new File(cdir+filename);
+		if(outfile.exists()) {
+			outfile.delete();
+		}
+		BufferedOutputStream output=new BufferedOutputStream(new FileOutputStream(new File(cdir, filename)));
+        byte[] buffer = new byte[4096];
+        int bytesRead = 0;
+        while ((bytesRead = datain.read(buffer)) != -1) {
+            output.write(buffer, 0, bytesRead); //数据通过datasocket读到缓存区，再写入本地
+        }
+        datain.close();
+        output.flush();
+        output.close();
+        datasocket.close();
+        response = ctrin.readLine();
+        System.out.println(response);
 	}
 	
-	public void do_download_active(String filename) {
-		
+	public void do_list() throws Exception {
+		ctrout.println("LIST");
+		String content=ctrin.readLine();
+		while(!content.equals("$")) {
+			System.out.println(content);
+			content=ctrin.readLine();
+		}
 	}
 	
-	public void do_download_passive(String filename) {
+	public void do_delete(String filename) throws Exception{
 		
 	}
 	

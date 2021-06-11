@@ -3,19 +3,20 @@ package server;
 import java.io.PrintWriter;
 
 public class USERCommand {
-    public USERCommand(String args, PrintWriter out){
+    public USERCommand(String args, PrintWriter out, WorkingThread thread){
         String responseToClient;
         System.out.println("USER command -- args from user: " + args);
         // verify user
-        if(Repository.userLoginStatus == false) {
+        if(thread.getUserStatus() == false) {
             if (args.equals(Repository.validUser)) {
-                responseToClient = "331 password please";
+                thread.setUser(args);
+                responseToClient = "331 Please specify the password.";
             } else {
-                responseToClient = "5xx invalid user";
+                responseToClient = "501 Invalid user.";
             }
         }
         else{
-            responseToClient = "User already logged in";
+            responseToClient = "User already logged in.";
         }
         // send response to client
         out.println(responseToClient);

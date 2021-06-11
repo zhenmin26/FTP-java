@@ -19,10 +19,21 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32a2becf-f117-4fc1-8223-f820c5aa8b74" name="Default Changelist" comment="update WorkingThread, if user input null, then break while loop">
+    <list default="true" id="32a2becf-f117-4fc1-8223-f820c5aa8b74" name="Default Changelist" comment="add if(user login status) in USER and PASS">
+      <change afterPath="$PROJECT_DIR$/src/server/DELETECommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/server/LISTCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/server/PUTCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/server/PWDCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/server/RETRCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/DataConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/DataConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/PASSCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/PASSCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/PASVCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/PASVCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/PORTCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/PORTCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/Repository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/Repository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/USERCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/USERCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/WorkingThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/WorkingThread.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,9 +151,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.DataClient" />
         <item itemvalue="Application.ControlClient" />
         <item itemvalue="Application.Server" />
-        <item itemvalue="Application.DataClient" />
         <item itemvalue="Application.ControlClient" />
         <item itemvalue="Application.socketClient" />
       </list>
@@ -164,7 +175,9 @@
       <workItem from="1623328110263" duration="615000" />
       <workItem from="1623328841052" duration="221000" />
       <workItem from="1623329228610" duration="976000" />
-      <workItem from="1623332126843" duration="443000" />
+      <workItem from="1623332126843" duration="627000" />
+      <workItem from="1623376451819" duration="5307000" />
+      <workItem from="1623389352305" duration="11350000" />
     </task>
     <task id="LOCAL-00001" summary="update WorkingThread, if user input null, then break while loop">
       <created>1623330151529</created>
@@ -173,7 +186,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623330151529</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="add if(user login status) in USER and PASS">
+      <created>1623332710732</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1623332710732</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -193,48 +213,60 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update WorkingThread, if user input null, then break while loop" />
-    <option name="LAST_COMMIT_MESSAGE" value="update WorkingThread, if user input null, then break while loop" />
+    <MESSAGE value="add if(user login status) in USER and PASS" />
+    <option name="LAST_COMMIT_MESSAGE" value="add if(user login status) in USER and PASS" />
   </component>
   <component name="WindowStateProjectService">
     <state x="218" y="122" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1623303132522">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="218" y="122" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.877@0.23.1440.877" timestamp="1623303132522" />
-    <state width="1314" height="230" key="GridCell.Tab.0.bottom" timestamp="1623332294690">
+    <state width="1262" height="230" key="GridCell.Tab.0.bottom" timestamp="1623401334308">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1314" height="230" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1623332294690" />
-    <state width="1314" height="230" key="GridCell.Tab.0.center" timestamp="1623332294688">
+    <state width="1262" height="230" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1623401334308" />
+    <state width="1262" height="230" key="GridCell.Tab.0.center" timestamp="1623401334307">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1314" height="230" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1623332294688" />
-    <state width="1314" height="230" key="GridCell.Tab.0.left" timestamp="1623332294686">
+    <state width="1262" height="230" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1623401334307" />
+    <state width="1262" height="230" key="GridCell.Tab.0.left" timestamp="1623401334307">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1314" height="230" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1623332294686" />
-    <state width="1314" height="230" key="GridCell.Tab.0.right" timestamp="1623332294689">
+    <state width="1262" height="230" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1623401334307" />
+    <state width="1262" height="230" key="GridCell.Tab.0.right" timestamp="1623401334307">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1314" height="230" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1623332294689" />
-    <state width="1314" height="285" key="GridCell.Tab.1.bottom" timestamp="1623329061990">
+    <state width="1262" height="230" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1623401334307" />
+    <state width="1262" height="285" key="GridCell.Tab.1.bottom" timestamp="1623397083914">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1314" height="285" key="GridCell.Tab.1.bottom/0.23.1440.877@0.23.1440.877" timestamp="1623329061990" />
-    <state width="1314" height="285" key="GridCell.Tab.1.center" timestamp="1623329061989">
+    <state width="1262" height="285" key="GridCell.Tab.1.bottom/0.23.1440.877@0.23.1440.877" timestamp="1623397083914" />
+    <state width="1262" height="285" key="GridCell.Tab.1.center" timestamp="1623397083912">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1314" height="285" key="GridCell.Tab.1.center/0.23.1440.877@0.23.1440.877" timestamp="1623329061989" />
-    <state width="1314" height="285" key="GridCell.Tab.1.left" timestamp="1623329061989">
+    <state width="1262" height="285" key="GridCell.Tab.1.center/0.23.1440.877@0.23.1440.877" timestamp="1623397083912" />
+    <state width="1262" height="285" key="GridCell.Tab.1.left" timestamp="1623397083912">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1314" height="285" key="GridCell.Tab.1.left/0.23.1440.877@0.23.1440.877" timestamp="1623329061989" />
-    <state width="1314" height="285" key="GridCell.Tab.1.right" timestamp="1623329061989">
+    <state width="1262" height="285" key="GridCell.Tab.1.left/0.23.1440.877@0.23.1440.877" timestamp="1623397083912" />
+    <state width="1262" height="285" key="GridCell.Tab.1.right" timestamp="1623397083913">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1314" height="285" key="GridCell.Tab.1.right/0.23.1440.877@0.23.1440.877" timestamp="1623329061989" />
-    <state x="362" y="187" key="Vcs.Push.Dialog.v2" timestamp="1623330155313">
+    <state width="1262" height="285" key="GridCell.Tab.1.right/0.23.1440.877@0.23.1440.877" timestamp="1623397083913" />
+    <state x="362" y="187" key="Vcs.Push.Dialog.v2" timestamp="1623332713166">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="362" y="187" key="Vcs.Push.Dialog.v2/0.23.1440.877@0.23.1440.877" timestamp="1623330155313" />
+    <state x="362" y="187" key="Vcs.Push.Dialog.v2/0.23.1440.877@0.23.1440.877" timestamp="1623332713166" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/server/RETRCommand.java</url>
+          <line>6</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

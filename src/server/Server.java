@@ -24,7 +24,7 @@ public class Server {
         while(true){
             try{
                 Socket client = server.accept();
-                int dataPort = 6789 + numberOfThreads; //should assign a random number
+                int dataPort = controlPort + numberOfThreads + 1; //should assign a random number
 
                 WorkingThread newWorkingThread = new WorkingThread(client, dataPort);
 

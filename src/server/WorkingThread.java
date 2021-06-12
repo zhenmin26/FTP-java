@@ -110,12 +110,20 @@ public class WorkingThread extends Thread {
                 break;
 
             // active mode
-            case "PORT":
-                if (userLogin) {
-                    new PORTCommand(args, controlOut);
-                } else {
-                    msgToClient("Please login first");
+            case "PORT": //args.startsWith("(") && args.endsWith(")") &&
+                if(args.startsWith("(") && args.endsWith(")") &&
+                        args.substring(args.indexOf("(")+1, args.indexOf(")", 2)).
+                                matches("(\\d*,\\d*,\\d*,\\d*,\\d*,\\d*)")){
+                    if (userLogin) {
+                        new PORTCommand(args, controlOut);
+                    } else {
+                        msgToClient("Please login first");
+                    }
                 }
+                else{
+                    msgToClient("Invalid command. Wrong arguments.");
+                }
+
                 break;
 
             // user retrieve file from server
@@ -140,7 +148,12 @@ public class WorkingThread extends Thread {
 
             // delete file
             case "RMD":
-                new RMDCommand();
+                if(args.matches("^[a-zA-Z0-9]+$")) {
+                    new RMDCommand(args, controlOut, this);
+                }
+                else{
+                    msgToClient("Invalid file name.");
+                }
                 break;
 
             // current directory
@@ -169,29 +182,37 @@ public class WorkingThread extends Thread {
                 break;
 
             case "CWD":
+                msgToClient("Not supported.");
                 break;
 
 
             case "NLST":
+                msgToClient("Not supported.");
                 break;
 
 
             case "EPSV":
+                msgToClient("Not supported.");
                 break;
 
             case "SYST":
+                msgToClient("Not supported.");
                 break;
 
             case "FEAT":
+                msgToClient("Not supported.");
                 break;
 
             case "EPRT":
+                msgToClient("Not supported.");
                 break;
 
             case "MKD":
+                msgToClient("Not supported.");
                 break;
 
             case "TYPE":
+                msgToClient("Not supported.");
                 break;
 
             default:

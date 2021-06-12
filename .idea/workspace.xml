@@ -22,10 +22,8 @@
     <list default="true" id="32a2becf-f117-4fc1-8223-f820c5aa8b74" name="Default Changelist" comment="update server">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/controlconnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/controlconnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/DataConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/DataConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/LISTCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/LISTCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/RETRCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/RETRCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/STORCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/STORCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/PORTCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/PORTCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/RMDCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/RMDCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/WorkingThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/WorkingThread.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -131,17 +129,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="Application.ControlClient" />
       <item itemvalue="Application.DataClient" />
@@ -180,7 +167,9 @@
       <workItem from="1623402470243" duration="8000" />
       <workItem from="1623402850670" duration="11382000" />
       <workItem from="1623415824808" duration="2156000" />
-      <workItem from="1623418137612" duration="5392000" />
+      <workItem from="1623418137612" duration="10449000" />
+      <workItem from="1623474368506" duration="130000" />
+      <workItem from="1623474977018" duration="21000" />
     </task>
     <task id="LOCAL-00001" summary="update WorkingThread, if user input null, then break while loop">
       <created>1623330151529</created>
@@ -210,7 +199,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623411505282</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="update server">
+      <created>1623428315576</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1623428315577</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -240,22 +236,22 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="218" y="122" width="1071" height="748" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.877@0.23.1440.877" timestamp="1623422045641" />
-    <state width="1389" height="230" key="GridCell.Tab.0.bottom" timestamp="1623428034404">
+    <state width="1347" height="230" key="GridCell.Tab.0.bottom" timestamp="1623474498948">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1389" height="230" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1623428034404" />
-    <state width="1389" height="230" key="GridCell.Tab.0.center" timestamp="1623428034404">
+    <state width="1347" height="230" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1623474498948" />
+    <state width="1347" height="230" key="GridCell.Tab.0.center" timestamp="1623474498947">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1389" height="230" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1623428034404" />
-    <state width="1389" height="230" key="GridCell.Tab.0.left" timestamp="1623428034404">
+    <state width="1347" height="230" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1623474498947" />
+    <state width="1347" height="230" key="GridCell.Tab.0.left" timestamp="1623474498946">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1389" height="230" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1623428034404" />
-    <state width="1389" height="230" key="GridCell.Tab.0.right" timestamp="1623428034404">
+    <state width="1347" height="230" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1623474498946" />
+    <state width="1347" height="230" key="GridCell.Tab.0.right" timestamp="1623474498948">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1389" height="230" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1623428034404" />
+    <state width="1347" height="230" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1623474498948" />
     <state width="1368" height="285" key="GridCell.Tab.1.bottom" timestamp="1623415806033">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
@@ -272,10 +268,10 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1368" height="285" key="GridCell.Tab.1.right/0.23.1440.877@0.23.1440.877" timestamp="1623415806032" />
-    <state x="362" y="187" key="Vcs.Push.Dialog.v2" timestamp="1623411512639">
+    <state x="362" y="187" key="Vcs.Push.Dialog.v2" timestamp="1623428332356">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="362" y="187" key="Vcs.Push.Dialog.v2/0.23.1440.877@0.23.1440.877" timestamp="1623411512639" />
+    <state x="362" y="187" key="Vcs.Push.Dialog.v2/0.23.1440.877@0.23.1440.877" timestamp="1623428332356" />
     <state x="719" y="381" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1623408965954">
       <screen x="0" y="23" width="1440" height="877" />
     </state>

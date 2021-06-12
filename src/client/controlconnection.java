@@ -1,3 +1,5 @@
+package client;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -22,9 +24,11 @@ public class controlconnection {
 	private String user;
 	private String pass;
 	private Socket ctrsocket;
+	private ServerSocket activedataserver;
 	private Socket datasocket;
 	private static BufferedReader ctrin;
 	private static PrintWriter ctrout;
+	private String ip="127.0.0.1";
 	private boolean passive_mode=false;
 	private String cdir="/Users/mayining/eclipse-workspace/FTP-master/client-directory/";
 //	private String sdir;
@@ -36,29 +40,48 @@ public class controlconnection {
 			ctrin = new BufferedReader(new InputStreamReader(ctrsocket.getInputStream()));
             ctrout = new PrintWriter(new OutputStreamWriter(ctrsocket.getOutputStream()), true);
 			startCtrConnection();
-			System.out.println("please choose active/passive transition");
+		
 			while(true) {
 				//首先读用户选择传递的方式是主动还是被动
+				//System.out.println("please choose active/passive transition");
+				System.out.print("miniftp> ");
 				BufferedReader wt = new BufferedReader(new InputStreamReader(System.in));
-			    String str=wt.readLine();
-				if(!str.equals("quit")) {
-					//主动模式下，读取用户需要的操作及参数
-					if(str.equals("active")) {
-						System.out.println("active");
-						active_mode();
-						processcmd();
+				String line=wt.readLine().trim();
+				String[] commandline=line.split(" ");
+				String cmd="";
+				//System.out.print("ftp> ");
+				StringBuilder cmdarg=new StringBuilder();
+				if(commandline!=null) {
+					cmd=commandline[0].trim();
+					for(int i=1;i<commandline.length;i++) {
+						cmdarg.append(commandline[i]);
+						cmdarg.append(" ");
 					}
-					if(str.equals("passive") ){
-						passive_mode();
-						processcmd();
-	
-					}else{
-						System.out.println("invalid command,please rewrite");
-					}
-				}else {
-					do_quit();
-					ctrsocket.close();
 				}
+			    switch(cmd) {
+			    case"quit":
+			    	do_quit();
+					ctrsocket.close();
+					break;
+			    case"list":
+			    	do_list();
+			    	break;
+			    case"active":
+			    	active_mode();
+			    	break;
+			    case"passive":
+			    	passive_mode();
+			    	break;
+			    case"put":
+			    	do_upload(cmdarg.toString().trim());
+			    	break;
+			    case"get":
+			    	do_download(cmdarg.toString().trim());
+			    	break;
+			    default:
+			    System.out.println("invalid command");
+			    break;
+			}	    
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -88,7 +111,19 @@ public controlconnection() {
 	        }
 	        
 	    while(true) {
-	    	    String cmd = wt.readLine();
+	    	//BufferedReader wt = new BufferedReader(new InputStreamReader(System.in));
+			String line=wt.readLine().trim();
+			String[] commandline=line.split(" ");
+			String cmd="";
+			//System.out.print("ftp> ");
+			StringBuilder cmdarg=new StringBuilder();
+			if(commandline!=null) {
+				cmd=commandline[0].trim();
+				for(int i=1;i<commandline.length;i++) {
+					cmdarg.append(commandline[i]);
+					cmdarg.append(" ");
+				}
+			}
 				if(!cmd.equals("quit")) {
 				if(cmd.equals("active")) {
 					active_mode();
@@ -152,14 +187,17 @@ public controlconnection() {
 	 */
 	public void active_mode() throws Exception {
 		String response;
-		int dataport=(int)(Math.random()*100000%9999)+1024;//random dataport
-		System.out.println(dataport);
-		ctrout.println("PORT "+dataport);//send information to server
-		
+		int dataport=(int)(Math.random()*1000%999)+1024;//random dataport
+		int dataport1=dataport/256;
+		int dataport2=dataport%256;
+		StringTokenizer ipparts = new StringTokenizer(this.ip, ".");
+		String res="PORT "+"("+ipparts.nextToken()+","+ipparts.nextToken()+","+ipparts.nextToken()+","+ipparts.nextToken()+","+dataport1+","+dataport2+")";
+		//System.out.println(res);
+		ctrout.println(res);//send information to server
 		response=ctrin.readLine();
 		System.out.println(response);
-		ServerSocket dataSocketserver=new ServerSocket(dataport);
-		datasocket=dataSocketserver.accept();//connect and listen
+		activedataserver=new ServerSocket(dataport);
+		datasocket=activedataserver.accept();//connect and listen
 		response=ctrin.readLine();
 		System.out.println(response);
 		
@@ -168,12 +206,12 @@ public controlconnection() {
 	/*
 	 * 被动模式，读取server发来的IP号和端口号并建立data连接
 	 */
-	public Socket passive_mode() throws Exception {
+	public void passive_mode() throws Exception {
 		String response;
 		//if(!passive_mode) {
 			ctrout.println("PASV");
 		response=ctrin.readLine();
-		if(!response.startsWith("2271")) {
+		if(!response.startsWith("227")) {
 			throw new Exception("cannot change to passive mode");
 		}
 		int begin = response.indexOf('(');
@@ -188,38 +226,11 @@ public controlconnection() {
         dataport = Integer.parseInt(tokenizer.nextToken()) * 256
                 + Integer.parseInt(tokenizer.nextToken());
         }
-        Socket dataSocket=new Socket(dataip,dataport);
+        //System.out.println(dataip+dataport);
+       datasocket=new Socket(dataip,dataport);
         response=ctrin.readLine();
         System.out.println(response);
-        return dataSocket;
 	//}
-	}
-	public void processcmd() throws Exception {
-		BufferedReader wt = new BufferedReader(new InputStreamReader(System.in));
-		String line=wt.readLine().trim();
-		String[] commandline=line.split(" ");
-		String cmd="";
-		System.out.print("ftp> ");
-		StringBuilder cmdarg=new StringBuilder();
-		if(commandline!=null) {
-			cmd=commandline[0].trim();
-			for(int i=1;i<commandline.length;i++) {
-				cmdarg.append(commandline[i]);
-				cmdarg.append(" ");
-			}
-		}
-			switch(cmd) {
-				case "put":	
-					do_upload(cmdarg.toString().trim());
-				case "get":
-					do_download(cmdarg.toString().trim());
-				case"quit":
-					do_quit();
-				case"delete":
-					do_delete(cmdarg.toString().trim());
-				case"list":
-					do_list();
-			}
 	}
 	
 	public void do_quit() {
@@ -227,11 +238,15 @@ public controlconnection() {
 	}
 	
 	public void do_upload(String filename) throws Exception {
+		if(datasocket==null) {
+			System.out.println("please choose active/passive mode");
+			return;
+		}
 		String response="";
 		String path=cdir+filename;
 		File file=new File(path);
 		if(!file.exists()) {
-			System.out.println("file doesnot exist");
+			System.out.println("file does not exist");
 			return;
 		}
 		FileInputStream fileinput = new FileInputStream(file);
@@ -239,6 +254,10 @@ public controlconnection() {
         ctrout.println("STOR "+filename);
         response=ctrin.readLine();
         System.out.println(response);
+        if(response.startsWith("550")) {
+        	input.close();
+        	return;
+        }
         BufferedOutputStream dataout=new BufferedOutputStream(datasocket.getOutputStream());
         byte[] buffer = new byte[4096];
         int bytesRead = 0;
@@ -254,9 +273,18 @@ public controlconnection() {
 	}
 	
 	public void do_download(String filename) throws Exception {
+		if(datasocket==null) {
+			System.out.println("please choose active/passive mode");
+			return;
+		}
 		String response;
 		ctrout.println("RETR "+filename);
 		response=ctrin.readLine();
+		System.out.println(response);
+        System.out.println(response);
+        if(response.startsWith("550")) {
+        	return;
+        }
 		BufferedInputStream datain = new BufferedInputStream(datasocket.getInputStream());
 		//检查本地文件夹中如果有这个文件，则直接删除
 		File outfile=new File(cdir+filename);
@@ -274,16 +302,20 @@ public controlconnection() {
         output.close();
         datasocket.close();
         response = ctrin.readLine();
-        System.out.println(response);
+        
 	}
 	
 	public void do_list() throws Exception {
 		ctrout.println("LIST");
 		String content=ctrin.readLine();
+		if(content.startsWith("550")) {
+			return;
+		}
 		while(!content.equals("$")) {
 			System.out.println(content);
 			content=ctrin.readLine();
 		}
+		//System.out.println("/r/n");
 	}
 	
 	public void do_delete(String filename) throws Exception{

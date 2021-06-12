@@ -115,7 +115,7 @@ public class WorkingThread extends Thread {
                         args.substring(args.indexOf("(")+1, args.indexOf(")", 2)).
                                 matches("(\\d*,\\d*,\\d*,\\d*,\\d*,\\d*)")){
                     if (userLogin) {
-                        new PORTCommand(args, controlOut);
+                        new PORTCommand(args, controlOut, this);
                     } else {
                         msgToClient("Please login first");
                     }
@@ -258,5 +258,9 @@ public class WorkingThread extends Thread {
 
     public void closeDataConnection() throws IOException {
         this.dataConnection.close();
+    }
+
+    public ServerSocket getPassiveDataSocket() {
+        return passiveDataSocket;
     }
 }

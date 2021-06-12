@@ -7,7 +7,7 @@ import java.net.ServerSocket;
 
 public class DataConnection {
     // socket
-    public static Socket dataConnection;
+    private Socket dataConnection;
     private ServerSocket passiveDataSocket;
 
     // data flow
@@ -16,11 +16,12 @@ public class DataConnection {
     private PrintWriter dataOutPassive;
 
     // active mode
-    public DataConnection(String host, int port, PrintWriter out) {
+    public DataConnection(String host, int port, PrintWriter out, WorkingThread thread) {
         try{
-            System.out.println("Active mode - host: " + host + "port: " + port);
+            System.out.println("Active mode - host: " + host + " port: " + port);
             this.dataConnection = new Socket(host, port);
-            dataOutActive = new PrintWriter(dataConnection.getOutputStream(), true);
+            thread.setDataConnection(dataConnection);
+//            dataOutActive = new PrintWriter(dataConnection.getOutputStream(), true);
             out.println("230 Data connection established - active mode");
 //            dataOutActive.println("230 Data connection established - active mode");
         } catch (IOException e) {

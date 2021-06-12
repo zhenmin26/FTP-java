@@ -41,8 +41,10 @@ public class STORCommand {
             out.println("226 File "  + f.getName() + " transfer successful");
         }
 
-        thread.closePassiveDataSocket();
-        thread.setPassiveDataSocket(null);
+        if(thread.getPassiveDataSocket() != null) {
+            thread.closePassiveDataSocket();
+            thread.setPassiveDataSocket(null);
+        }
         thread.closeDataConnection();
         thread.setDataConnection(null);
     }

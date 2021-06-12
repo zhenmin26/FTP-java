@@ -42,8 +42,10 @@ public class RETRCommand {
 
         out.println("226 File transferred successfully");
 
-        thread.closePassiveDataSocket();
-        thread.setPassiveDataSocket(null);
+        if(thread.getPassiveDataSocket() != null) {
+            thread.closePassiveDataSocket();
+            thread.setPassiveDataSocket(null);
+        }
         thread.closeDataConnection();
         thread.setDataConnection(null);
     }

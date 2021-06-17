@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ * 服务端
+ */
 public class Server {
     private int controlPort = 5678;
     private ServerSocket server;
@@ -24,7 +27,7 @@ public class Server {
         while(true){
             try{
                 Socket client = server.accept();
-                int dataPort = controlPort + numberOfThreads + 1; //should assign a random number
+                int dataPort = controlPort + numberOfThreads + 1;
 
                 WorkingThread newWorkingThread = new WorkingThread(client, dataPort);
 

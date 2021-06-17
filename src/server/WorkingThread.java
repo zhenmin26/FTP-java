@@ -103,7 +103,7 @@ public class WorkingThread extends Thread {
             // passive mode
             case "PASV":
                 if (userLogin) {
-                    new PASVCommand(dataPort, args, controlOut, this);
+                    new PASVCommand(dataPort, controlOut, this);
                 } else {
                     msgToClient("Please login first");
                 }
@@ -148,7 +148,7 @@ public class WorkingThread extends Thread {
 
             // delete file
             case "RMD":
-                if(args.matches("^[a-zA-Z0-9]+$")) {
+                if(args.matches("^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$")) {
                     new RMDCommand(args, controlOut, this);
                 }
                 else{

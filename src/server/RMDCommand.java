@@ -3,7 +3,16 @@ package server;
 import java.io.File;
 import java.io.PrintWriter;
 
+/**
+ * rmd命令
+ */
 public class RMDCommand {
+    /**
+     *
+     * @param args 要删除的文件名/文件夹名
+     * @param out control socket
+     * @param thread 对应线程
+     */
     public RMDCommand(String args, PrintWriter out, WorkingThread thread){
         String currentPath = Repository.currentDir;
         String file = currentPath + Repository.fileSeperator + args;

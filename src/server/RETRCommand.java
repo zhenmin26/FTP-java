@@ -3,6 +3,13 @@ package server;
 import java.io.*;
 
 public class RETRCommand {
+    /**
+     * RETR 将文件从服务端传送到客户端
+     * @param file
+     * @param out
+     * @param thread
+     * @throws IOException
+     */
     public RETRCommand(String file, PrintWriter out, WorkingThread thread) throws IOException {
         File f = new File(Repository.currentDir + Repository.fileSeperator + file);
         BufferedInputStream fin = null;
@@ -33,8 +40,12 @@ public class RETRCommand {
 
         // close stream
         try {
-            fin.close();
-            fout.close();
+            if(fin != null) {
+                fin.close();
+            }
+            if(fout != null) {
+                fout.close();
+            }
         } catch (IOException e) {
             out.println("Could not close file stream.");
             e.printStackTrace();

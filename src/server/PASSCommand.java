@@ -2,7 +2,16 @@ package server;
 
 import java.io.PrintWriter;
 
+/**
+ * pass命令
+ */
 public class PASSCommand {
+    /**
+     * 密码
+     * @param args 客户端传来的密码
+     * @param out control socket
+     * @param thread 对应的线程
+     */
     public PASSCommand(String args, PrintWriter out, WorkingThread thread) {
         String responseToClient;
         System.out.println("PASS command -- args from user: " + args);

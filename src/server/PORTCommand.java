@@ -20,7 +20,7 @@ public class PORTCommand {
         int port = Integer.parseInt(data[4]) * 256 + Integer.parseInt(data[5]);
 
         thread.setDataHost(host);
-        thread.setDataPort(port);
+        thread.setDataPortActive(port);
 
         out.println("Active mode - host: " + host + " port: " + port);
         new DataConnection(host, port, out, thread);

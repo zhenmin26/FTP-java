@@ -22,7 +22,9 @@ public class WorkingThread extends Thread {
     // data socket
     private ServerSocket dataSocket;
     private String dataHost;
-    private int dataPort;
+    private int dataPortActive;
+    private int dataPortPassive;
+    private int dataPortControl;
     private Socket dataConnection;
 
     // data flow
@@ -31,7 +33,7 @@ public class WorkingThread extends Thread {
 
     public WorkingThread(Socket client, int dataPort) {
         this.controlSocket = client;
-        this.dataPort = dataPort;
+        this.dataPortControl = dataPort;
 
         // "user.home": user home dir
         Repository.rootDir = System.getProperty("user.dir"); // user current working dir
@@ -103,7 +105,7 @@ public class WorkingThread extends Thread {
             // passive mode
             case "PASV":
                 if (userLogin) {
-                    new PASVCommand(dataPort, controlOut, this);
+                    new PASVCommand(dataPortControl, controlOut, this);
                 } else {
                     msgToClient("Please login first");
                 }
@@ -148,7 +150,7 @@ public class WorkingThread extends Thread {
 
             // delete file
             case "RMD":
-                if(args.matches("^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$")) {
+                if(args.matches("^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$") || args.matches("^[a-zA-Z0-9]+$")) {
                     new RMDCommand(args, controlOut, this);
                 }
                 else{
@@ -238,9 +240,11 @@ public class WorkingThread extends Thread {
         this.dataHost = host;
     }
 
-    public void setDataPort(int port){
-        this.dataPort = port;
+    public void setDataPortActive(int port){
+        this.dataPortActive = port;
     }
+
+    public void setDataPortPassive(int port) {this.dataPortPassive = port; }
 
     public void setDataConnection(Socket socket){
         this.dataConnection = socket;

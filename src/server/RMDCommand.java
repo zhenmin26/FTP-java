@@ -17,7 +17,7 @@ public class RMDCommand {
         String currentPath = Repository.currentDir;
         String file = currentPath + Repository.fileSeperator + args;
         File f = new File(file);
-        if(f.exists()){
+        if(f.exists()){ // 判断文件是否存在
             if(f.delete()) {
                 if (f.isDirectory()) {
                     out.println("250 Directory was successfully deleted.");

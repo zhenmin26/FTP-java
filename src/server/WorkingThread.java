@@ -42,20 +42,21 @@ public class WorkingThread extends Thread {
 
     public void run() {
         try{
+            // 控制连接
             controlIn = new BufferedReader(
                     new InputStreamReader(controlSocket.getInputStream()));
             controlOut = new PrintWriter(controlSocket.getOutputStream(), true);
 
-            msgToClient("220 Connected. Hello from FTP-Server."); //controlPort connected
+            msgToClient("220 Connected. Hello from FTP-Server."); //提示客户端连接成功
 
             while(quitCommand) {
-                // access command from client
+                // 接收来自客户端的命令
                 String userCommand = controlIn.readLine();
                 System.out.println("control server receive command " + userCommand);
 
-                // verify user input
+                // 验证用户命令
                 if(userCommand != null) {
-                    CommandProcessor(userCommand);
+                    CommandProcessor(userCommand); // CommandProcessor处理用户命令
                 }
                 else{
                     break;
@@ -75,6 +76,7 @@ public class WorkingThread extends Thread {
         }
     }
 
+    // send message to client
     private void msgToClient(String msg) {
         controlOut.println(msg);
     }
@@ -112,7 +114,7 @@ public class WorkingThread extends Thread {
                 break;
 
             // active mode
-            case "PORT": //args.startsWith("(") && args.endsWith(")") &&
+            case "PORT": //args.startsWith("(") && args.endsWith(")")
                 if(args.startsWith("(") && args.endsWith(")") &&
                         args.substring(args.indexOf("(")+1, args.indexOf(")", 2)).
                                 matches("(\\d*,\\d*,\\d*,\\d*,\\d*,\\d*)")){
@@ -232,9 +234,7 @@ public class WorkingThread extends Thread {
         this.userLogin = true;
     }
 
-    public void setUser(String user){
-        this.USER.set(user);;
-    }
+    public void setUser(String user){ this.USER.set(user); }
 
     public void setDataHost(String host){
         this.dataHost = host;
@@ -256,13 +256,9 @@ public class WorkingThread extends Thread {
 
     public void setPassiveDataSocket(ServerSocket dataSocket){ this.passiveDataSocket = dataSocket; }
 
-    public void closePassiveDataSocket() throws IOException {
-        this.passiveDataSocket.close();
-    }
+    public void closePassiveDataSocket() throws IOException { this.passiveDataSocket.close(); }
 
-    public void closeDataConnection() throws IOException {
-        this.dataConnection.close();
-    }
+    public void closeDataConnection() throws IOException { this.dataConnection.close(); }
 
     public ServerSocket getPassiveDataSocket() {
         return passiveDataSocket;

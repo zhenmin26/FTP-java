@@ -3,6 +3,9 @@ package server;
 import java.io.*;
 
 public class RETRCommand {
+    private BufferedInputStream fin;
+    private BufferedOutputStream fout;
+
     /**
      * RETR 将文件从服务端传送到客户端
      * @param file
@@ -12,11 +15,12 @@ public class RETRCommand {
      */
     public RETRCommand(String file, PrintWriter out, WorkingThread thread) throws IOException {
         File f = new File(Repository.currentDir + Repository.fileSeperator + file);
-        BufferedInputStream fin = null;
-        BufferedOutputStream fout = null;
-        if(!f.exists()){
+        fin = null;
+        fout = null;
+        if(!f.exists()){ // 判断文件是否存在
             out.println("550 File does not exist.");
         }
+        // 文件传输过程
         else{
             out.println("Data transfer starts");
 
@@ -38,7 +42,7 @@ public class RETRCommand {
             }
         }
 
-        // close stream
+        // 关闭文件流
         try {
             if(fin != null) {
                 fin.close();
@@ -53,6 +57,7 @@ public class RETRCommand {
 
         out.println("226 File transferred successfully");
 
+        // 关闭数据连接和socket(如果是被动模式)
         if(thread.getPassiveDataSocket() != null) {
             thread.closePassiveDataSocket();
             thread.setPassiveDataSocket(null);

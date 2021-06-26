@@ -17,9 +17,8 @@ public class PASVCommand {
     public PASVCommand(int dataPort, PrintWriter out, WorkingThread thread) {
         this.dataPort = dataPort;
 
-        // set host and port
+        // IP和端口
         String serverIP = "127.0.0.1"; // local test
-//        String serverIP = "172.20.10.7"; // remote test
         String[] data = serverIP.split("\\.");
         int p1 = dataPort / 256;
         int p2 = dataPort % 256;
@@ -27,10 +26,12 @@ public class PASVCommand {
         thread.setDataHost(serverIP);
         thread.setDataPortPassive(dataPort);
 
+        // 向客户端发送IP和端口
         out.println("227 Entering Passive mode (" +
                 data[0] + "," + data[1] + "," + data[2] + "," + data[3] + ","
                 + p1 + "," + p2 + ")");
 
+        // 新建数据连接
         new DataConnection(dataPort, out, thread);
     }
 }

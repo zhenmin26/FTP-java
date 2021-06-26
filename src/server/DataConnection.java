@@ -10,11 +10,6 @@ public class DataConnection {
     private Socket dataConnection;
     private ServerSocket passiveDataSocket;
 
-    // data flow
-    private PrintWriter dataIn;
-    private PrintWriter dataOutActive;
-    private PrintWriter dataOutPassive;
-
     // active mode
     /**
      * 主动模式
@@ -25,13 +20,15 @@ public class DataConnection {
      */
     public DataConnection(String host, int port, PrintWriter out, WorkingThread thread) {
         try{
-            System.out.println("Active mode - host: " + host + " port: " + port);
+            System.out.println("Active mode - host: " + host +
+                    " port: " + port);
+            // 新建数据连接
             this.dataConnection = new Socket(host, port);
+            // 在相应线程内更新数据连接
             thread.setDataConnection(dataConnection);
             thread.setPassiveDataSocket(null);
-//            dataOutActive = new PrintWriter(dataConnection.getOutputStream(), true);
+            // 提示客户端数据连接已经建立
             out.println("230 Data connection established - active mode");
-//            dataOutActive.println("230 Data connection established - active mode");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -48,16 +45,14 @@ public class DataConnection {
     public DataConnection(int port, PrintWriter out, WorkingThread thread) {
         try{
             System.out.println("Passive mode - dataport: " + port);
+            // 接收客户端连接
             passiveDataSocket = new ServerSocket(port);
             this.dataConnection = passiveDataSocket.accept();
-
-            // set data connection and data Server-Socket for thread
+            // 在相应咸亨内更新数据连接和socket
             thread.setDataConnection(dataConnection);
             thread.setPassiveDataSocket(passiveDataSocket);
-
-//            dataOutPassive = new PrintWriter(dataConnection.getOutputStream(), true);
+            // 提示客户端数据连接已经建立
             out.println("230 Data connection established - passive mode");
-//            dataOutPassive.println("230 Data connection established - passive mode");
         } catch (IOException e) {
             e.printStackTrace();
         }

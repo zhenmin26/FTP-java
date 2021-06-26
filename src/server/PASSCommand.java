@@ -15,14 +15,14 @@ public class PASSCommand {
     public PASSCommand(String args, PrintWriter out, WorkingThread thread) {
         String responseToClient;
         System.out.println("PASS command -- args from user: " + args);
-        // verify user
-        if(Repository.userLoginStatus == true){
+        // 验证用户密码
+        if(Repository.userLoginStatus){ // 判断用户是否已经登陆
             responseToClient = "User already logged in.";
         }
         else {
             if (args.equals(Repository.validPassword)) {
                 responseToClient = "230 Login successfully.";
-                // set user status
+                // 更新用户登录状态为已登陆
                 thread.setUserStatus(true);
             } else {
                 responseToClient = "530 Wrong password.";

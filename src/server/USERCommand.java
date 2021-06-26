@@ -15,8 +15,8 @@ public class USERCommand {
     public USERCommand(String args, PrintWriter out, WorkingThread thread){
         String responseToClient;
         System.out.println("USER command -- args from user: " + args);
-        // verify user
-        if(thread.getUserStatus() == false) {
+        // 验证用户
+        if(!thread.getUserStatus()) { // 判断用户是否已经登陆
             if (args.equals(Repository.validUser)) {
                 thread.setUser(args);
                 responseToClient = "331 Please specify the password.";

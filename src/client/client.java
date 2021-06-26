@@ -19,7 +19,7 @@ public class client {
 	private ServerSocket activedataserver;
 	private Socket datasocket;
 	private String ip="127.0.0.1";//本机的ip地址
-	private String cdir="/Users/mayining/eclipse-workspace/FTP-master/client-directory/";//本机的目录
+	private String cdir=" ";//本机的目录
 	
 	public client(String ip, int port) {
 		try {
@@ -43,7 +43,7 @@ public class client {
 			        }
 			        response=ctrin.readLine();
 			        System.out.println(response);
-			        }
+			     }
 			     
 			     //如果用户输入quit则及时退出,如果控制端口已关闭则不再读取命令
 		        String cmd="";
@@ -107,16 +107,20 @@ public class client {
 		int dataport=(int)(Math.random()*1000%999)+1024;//random dataport
 		int dataport1=dataport/256;
 		int dataport2=dataport%256;
+		
 		StringTokenizer ipparts = new StringTokenizer(this.ip, ".");
 		String res="PORT "+"("+ipparts.nextToken()+","+ipparts.nextToken()+","+ipparts.nextToken()+","+ipparts.nextToken()+","+dataport1+","+dataport2+")";
 		ctrout.println(res);//send information to server
 		response=ctrin.readLine();
 		System.out.println(response);
+	//connect and listen
 		activedataserver=new ServerSocket(dataport);
-		datasocket=activedataserver.accept();//connect and listen
+		 datasocket=activedataserver.accept();
 		response=ctrin.readLine();
 		System.out.println(response);
-		
+		if(response.startsWith("230")) {
+			return;
+		}
 	}
 	
 	/*
@@ -181,6 +185,7 @@ public class client {
         System.out.println(response);
         if(response.startsWith("550")) {//550为服务器报错反馈，读到就返回退出
         	input.close();
+        	datasocket.close();
         	return;
         }
         BufferedOutputStream dataout=new BufferedOutputStream(datasocket.getOutputStream());

@@ -17,11 +17,13 @@ public class LISTCommand {
      */
     public LISTCommand(String name, PrintWriter out, WorkingThread thread) throws IOException {
         File f = new File(name);
-        if(f.exists() && f.isDirectory()){
+        if(f.exists() && f.isDirectory()){ // 判断文件是否存在及其类型
             File[] files = f.listFiles();
             String content = "";
-            for(int i=0; i<files.length; i++) {
-                out.println(i + " - " + files[i].getName() + " - " + ((files[i].isFile())?"File":"Directory") + " - " + files[i].length() + " bytes");
+            for(int i=0; i<files.length; i++) { // 对于每个文件，返回其相关信息
+                out.println(i + " - " + files[i].getName() + " - " +
+                        ((files[i].isFile())?"File":"Directory") + " - " +
+                        files[i].length() + " bytes");
             }
             out.println("$");
         }

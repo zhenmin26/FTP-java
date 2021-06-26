@@ -20,9 +20,10 @@ public class STORCommand {
         String fileName = args;
         File f = new File(Repository.currentDir + Repository.fileSeperator + args);
 
-        if(f.exists()){
+        if(f.exists()){ // 判断文件是否存在
             out.println("550 File already exists");
         }
+        // 传输文件过程
         else{
             fin = new BufferedInputStream(thread.getDataConnection().getInputStream());
             fout = new BufferedOutputStream(new FileOutputStream(f));
@@ -39,7 +40,7 @@ public class STORCommand {
                 e.printStackTrace();
             }
 
-            // close stream
+            // 关闭传输流
             try{
                 if(fin != null) {
                     fin.close();
@@ -55,11 +56,11 @@ public class STORCommand {
             out.println("226 File "  + f.getName() + " transfer successful");
         }
 
+        // 文件传输成功后，关闭数据连接和socket(如果是被动模式)
         if(thread.getPassiveDataSocket() != null) {
             thread.closePassiveDataSocket();
             thread.setPassiveDataSocket(null);
         }
-
         thread.closeDataConnection();
         thread.setDataConnection(null);
     }

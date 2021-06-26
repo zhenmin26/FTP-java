@@ -13,7 +13,7 @@ public class Server {
 
     public Server(){
         try{
-            server = new ServerSocket(controlPort); // socket listening on controlPort 5678
+            server = new ServerSocket(controlPort); // 监听5678端口
         }
         catch(IOException e){
             System.out.println("cannot create server...");
@@ -26,13 +26,17 @@ public class Server {
 
         while(true){
             try{
+                // 接收客户端连接
                 Socket client = server.accept();
                 int dataPort = controlPort + numberOfThreads + 1;
 
+                // 新建工作线程
                 WorkingThread newWorkingThread = new WorkingThread(client, dataPort);
 
                 System.out.println("New connection! New Thread created!");
                 numberOfThreads++;
+
+                // 启动工作线程
                 newWorkingThread.start();
             }
             catch(IOException e){
@@ -44,5 +48,4 @@ public class Server {
     public static void main(String[] args) throws IOException {
         new Server();
     }
-
 }
